@@ -1,0 +1,85 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Mouse Move>
+<style>
+    body {
+        height: 200px;
+        background: green;
+    }
+    .dot {
+        height: 20px; width: 20px;
+
+        /* rounds corners */
+        /*half of the length of side of square of div*/
+        background: white;
+
+        /*will use window;s global cooridnates, whcih the mouse events also use to locate the mouse as coordinates*/
+        position: absolute;
+    }
+</style>
+<script>
+    addEventListener("mousemove", function(event) {
+        var dot = document.createElement("div");
+
+        //give the div properties using css selector class
+        dot.className = "dot";
+
+        //center the circle at the center of the mouse
+        dot.style.left = (event.pageX - 5) + "px";
+        dot.style.top = (event.pageY - 5) + "px";
+
+        //DISPLAY dot div//
+        document.body.appendChild(dot);
+    });
+</script>
+
+
+
+    <!doctype html>
+
+    <style>
+        .trail { /* className for the trail elements */
+            position: absolute;
+            height: 6px; width: 6px;
+            border-radius: 3px;
+            background: teal;
+        }
+        body {
+            height: 300px;
+        }
+    </style>
+
+    <body>
+    <script>
+        var dots = [];
+        for (var i = 0; i < 12; i++) {
+            var node = document.createElement("div");
+            node.className = "trail";
+            document.body.appendChild(node);
+            dots.push(node);
+        }
+        var currentDot = 0;
+
+        addEventListener("mousemove", function(event) {
+            var dot = dots[currentDot];
+            dot.style.left = (event.pageX - 3) + "px";
+            dot.style.top = (event.pageY - 3) + "px";
+
+            //iterates to next dot
+            //////where does IT STOP CREATING DOTS
+            currentDot = (currentDot + 1) % dots.length;
+        });
+    </script>
+    </body>

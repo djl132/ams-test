@@ -1,0 +1,70 @@
+
+
+
+
+<!doctype html>
+<script src="code/mountains.js"></script>
+<script src="code/chapter/13_dom.js"></script>
+
+<style>
+    /* Defines a cleaner look for tables */
+    table  { border-collapse: collapse; }
+    td, th { border: 1px solid black; padding: 3px 8px; }
+    th     { text-align: left; }
+</style>
+
+<body>
+<script>
+
+    //get an
+    function buildTable(data) {
+
+        //table
+        var table = document.createElement("table");
+
+
+        //array for accessing header names
+            //used for creating headers
+            //used for accessing object[field] values.
+var field =
+        //add HEADERS to table
+        var headRow = document.createElement("tr");
+        fields.forEach(function(field) {
+            var headCell = document.createElement("th");
+            headCell.textContent = field;
+            headRow.appendChild(headCell);
+        });
+        table.appendChild(headRow);
+
+
+        //in each row, add values to the headers
+        data.forEach(function(object) {
+
+            //for each object create another row
+            var row = document.createElement("tr");
+
+            //access the value of its fields
+            fields.forEach(function(field) {
+
+                //create cell containing content using object[field] to access the property values.
+                var cell = document.createElement("td");
+                cell.textContent = object[field];
+
+                //align right all numbers
+                if (typeof object[field] == "number")
+                    cell.style.textAlign = "right";
+
+                //add values to row
+                row.appendChild(cell);
+            });
+
+            //add the row
+            table.appendChild(row);
+        });
+
+        return table;
+    }
+
+    document.body.appendChild(buildTable(MOUNTAINS));
+</script>
+</body>
